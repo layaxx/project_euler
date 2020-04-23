@@ -38,9 +38,16 @@ def getNumberOfDivisors(n):
         count += 1
     return count
     
-# solve()
+solve()
 
 
+
+
+
+
+
+
+# some analysis of the algorithms
 def testFunctions():
     # get random numbers
     totalBetter = datetime.now() - datetime.now()
@@ -49,7 +56,7 @@ def testFunctions():
     for times in range(0, 5):
         randomNumbers = []
         for x in range(0, 10):
-            randomNumbers.append(random.getrandbits(max(3,random.getrandbits(6))))
+            randomNumbers.append(random.getrandbits(max(3,random.getrandbits(5))))
             print("generated new random Number: " + str(randomNumbers[x]))
         startTime = datetime.now()
         for x in randomNumbers:
@@ -65,9 +72,4 @@ def testFunctions():
     print("My Algorithm: " + str(totalWorse / 50))
     print("My Algorithm took " + str((totalWorse / 50)/(totalBetter / 50))+ " times as long")
 
-
-
-
-
-
-testFunctions()
+# testFunctions()
