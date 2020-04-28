@@ -7,46 +7,39 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers. """
 
+# Kinda slow but at least its working
+
 import math
 
 def solve():
     abundantNumbers = []
     limit = 28123
-    for integer in range(12, limit + 1 - 12):
-        if sumOfDivisors(integer) > integer:
-            abundantNumbers.append(integer)
-    print("completed list of abundant Numbers: " + str(len(abundantNumbers)))
     sum = 0
-    for integer in range(0, limit + 1):
-        if not checkIfSum(integer, abundantNumbers):
-            sum += integer
+
+    isSum = [False] * (limit + 1);
+
+    for integer in range(1, limit + 1):
+        if sumOfDivisorsBruteforce(integer) > integer:
+            abundantNumbers.append(integer)
+    
+    for index1 in range(len(abundantNumbers)):
+        for index2 in range(len(abundantNumbers)):
+            if abundantNumbers[index1] + abundantNumbers[index2] > limit:
+                break;
+            else:
+                isSum[abundantNumbers[index1] + abundantNumbers[index2]] = True
+
+    for number in range(limit + 1):
+        if not isSum[number]:
+            sum += number
 
     print(sum)
 
-def checkIfSum(integer, abundantNumbers):
-    abundantNummer1 = abundantNumbers[0]
-    abundantNummer2 = abundantNumbers[0]
-    while abundantNummer1 <= integer / 2:
-        while abundantNummer2 + abundantNummer1 <= integer:
-            if abundantNummer1 + abundantNummer2 == integer:
-                return True
-            abundantNummer2 = abundantNumbers[abundantNumbers.index(abundantNummer2) + 1]
-        abundantNummer1 = abundantNumbers[abundantNumbers.index(abundantNummer1) + 1]
-    return False;
-
-
-def sumOfDivisors(number):
+def sumOfDivisorsBruteforce(number):
     sum = 0
-    i = 1
-    while i <= math.sqrt(number): 
-          
-        if (number % i == 0) : 
-            sum += i
-            # If divisors are equal, print only one 
-            if not (number / i == i or number/i == number) : 
-                sum += number/i
-        i = i + 1
-
-    return int(sum)
+    for i in range(1, number):
+        if number % i == 0:
+            sum += i        
+    return sum
 
 solve()
