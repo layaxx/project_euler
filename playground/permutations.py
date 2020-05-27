@@ -1,5 +1,5 @@
 import itertools
 
-l = list(itertools.permutations('0123456789', 10))
+l = list(itertools.permutations('012', 3))
 
-print(l[999999])
+print(l)
